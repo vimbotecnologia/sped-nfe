@@ -4042,21 +4042,21 @@ class Make
                 $this->dom->addChild(
                     $icms,
                     'qBCMonoRet',
-                    $this->conditionalNumberFormatting($std->qBCMonoRet, 4),
+                    $this->conditionalNumberFormatting(($std->qBCMonoRet ?? 0), 4),
                     false,
                     "$identificador [item $std->item] Quantidade tributada retida anteriormente"
                 );
                 $this->dom->addChild(
                     $icms,
                     'adRemICMSRet',
-                    $this->conditionalNumberFormatting($std->adRemICMSRet, 4),
+                    $this->conditionalNumberFormatting(($std->adRemICMSRet ?? 0), 4),
                     true,
                     "$identificador [item $std->item] Alíquota ad rem do imposto retido anteriormente"
                 );
                 $this->dom->addChild(
                     $icms,
                     'vICMSMonoRet',
-                    $this->conditionalNumberFormatting($std->vICMSMonoRet),
+                    $this->conditionalNumberFormatting($std->vICMSMonoRet ?? 0),
                     true,
                     "$identificador [item $std->item] Valor do ICMS retido anteriormente"
                 );
