@@ -752,6 +752,7 @@ try {
         'pBCOp',
         'UFST'
     ];
+    $mk->tagICMSPart((object)$ic);
 
     //ICMSSN
     //Tributação do ICMS pelo SIMPLES NACIONAL
@@ -787,6 +788,7 @@ try {
         'vICMSEfet',
         'vICMSSubstituto'
     ];
+    $mk->tagICMSSN((object)$ic);
 
     //ICMSST
     //Grupo de informação do ICMSST devido para a UF de destino, nas operações interestaduais de produtos que
@@ -1007,7 +1009,7 @@ try {
         'qTrib' => 100, //OBRIGATÓRIO Quantidade com base no campo uTrib informado até 4 decimais
         'vIS' => 200.00 //OBRIGATÓRIO Valor do Imposto Seletivo calculado 2 decimais
     ];
-    $mk->tagIS((object) $is);
+    //$mk->tagIS((object) $is);
 
     //############################## TAG <det/imposto/IBCCBS> opcional ################################################
     $ibs = [

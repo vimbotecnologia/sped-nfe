@@ -363,42 +363,42 @@ trait TraitTagDetIBSCBS
         $this->dom->addChild(
             $gTribRegular,
             "pAliqEfetRegIBSUF",
-            $std->pAliqEfetRegIBSUF,
+            $this->conditionalNumberFormatting($std->pAliqEfetRegIBSUF / 100, 4),
             true,
             "$identificador Alíquota do IBS da UF (pAliqEfetRegIBSUF)"
         );
         $this->dom->addChild(
             $gTribRegular,
             "vTribRegIBSUF",
-            $std->vTribRegIBSUF,
+            $this->conditionalNumberFormatting($std->vTribRegIBSUF),
             true,
             "$identificador Valor do IBS da UF (vTribRegIBSUF)"
         );
         $this->dom->addChild(
             $gTribRegular,
             "pAliqEfetRegIBSMun",
-            $std->pAliqEfetRegIBSMun,
+            $this->conditionalNumberFormatting($std->pAliqEfetRegIBSMun / 100, 4),
             true,
             "$identificador Alíquota do IBS do Município (pAliqEfetRegIBSMun)"
         );
         $this->dom->addChild(
             $gTribRegular,
             "vTribRegIBSMun",
-            $std->vTribRegIBSMun,
+            $this->conditionalNumberFormatting($std->vTribRegIBSMun),
             true,
             "$identificador Valor do IBS do Município (vTribRegIBSMun)"
         );
         $this->dom->addChild(
             $gTribRegular,
             "pAliqEfetRegCBS",
-            $std->pAliqEfetRegCBS,
+            $this->conditionalNumberFormatting($std->pAliqEfetRegCBS / 100, 4),
             true,
             "$identificador Alíquota da CBS (pAliqEfetRegCBS)"
         );
         $this->dom->addChild(
             $gTribRegular,
             "vTribRegCBS",
-            $std->vTribRegCBS,
+            $this->conditionalNumberFormatting($std->vTribRegCBS),
             true,
             "$identificador Valor da CBS (vTribRegCB)"
         );
@@ -517,6 +517,7 @@ trait TraitTagDetIBSCBS
     }
 
     /**
+     * Grupo de Tributação em compras governamentais
      * @param stdClass $std
      * @return DOMElement
      * @throws DOMException
@@ -525,19 +526,19 @@ trait TraitTagDetIBSCBS
     {
         $possible = [
             'item',
-            'pIBSUF',
-            'vIBSUF',
-            'pIBSMun',
-            'vIBSMun',
-            'pCBS',
-            'vCBS',
+            'pAliqIBSUF',
+            'vTribIBSUF',
+            'pAliqIBSMun',
+            'vTribIBSMun',
+            'pAliqCBS',
+            'vTribCBS',
         ];
         $std = $this->equilizeParameters($std, $possible);
         $identificador = "UB82a <gTribCompraGov> -";
         $gTrib = $this->dom->createElement("gTribCompraGov");
         $this->dom->addChild(
             $gTrib,
-            "pIBSUF",
+            "pAliqIBSUF",
             $this->conditionalNumberFormatting($std->pIBSUF, 4),
             true,
             "$identificador Alíquota do IBS de competência do Estado. (pIBSUF)"
@@ -626,41 +627,43 @@ trait TraitTagDetIBSCBS
 
         $identificador = "UB84 <gIBSCBSMono> -";
         $gIBSCBSMono = $this->dom->createElement("gIBSCBSMono");
-        $this->dom->addChild(
-            $gIBSCBSMono,
-            "qBCMono",
-            $this->conditionalNumberFormatting($std->qBCMono, 4),
-            true,
-            "$identificador Quantidade tributada na monofasia (qBCMono)"
-        );
-        $this->dom->addChild(
-            $gIBSCBSMono,
-            "adRemIBS",
-            $this->conditionalNumberFormatting($std->adRemIBS, 4),
-            true,
-            "$identificador Alíquota ad rem do IBS (adRemIBS)"
-        );
-        $this->dom->addChild(
-            $gIBSCBSMono,
-            "adRemCBS",
-            $this->conditionalNumberFormatting($std->adRemCBS, 4),
-            true,
-            "$identificador Alíquota ad rem do CBS (adRemCBS)"
-        );
-        $this->dom->addChild(
-            $gIBSCBSMono,
-            "vIBSMono",
-            $this->conditionalNumberFormatting($std->vIBSMono),
-            true,
-            "$identificador Valor do IBS monofásico (vIBSMono)"
-        );
-        $this->dom->addChild(
-            $gIBSCBSMono,
-            "vCBSMono",
-            $this->conditionalNumberFormatting($std->vCBSMono),
-            true,
-            "$identificador Valor do CBS monofásico (vCBSMono)"
-        );
+        if (!empty($std->qBCMono)) {
+            $this->dom->addChild(
+                $gIBSCBSMono,
+                "qBCMono",
+                $this->conditionalNumberFormatting($std->qBCMono, 4),
+                true,
+                "$identificador Quantidade tributada na monofasia (qBCMono)"
+            );
+            $this->dom->addChild(
+                $gIBSCBSMono,
+                "adRemIBS",
+                $this->conditionalNumberFormatting($std->adRemIBS ?? 0, 4),
+                true,
+                "$identificador Alíquota ad rem do IBS (adRemIBS)"
+            );
+            $this->dom->addChild(
+                $gIBSCBSMono,
+                "adRemCBS",
+                $this->conditionalNumberFormatting($std->adRemCBS ?? 0, 4),
+                true,
+                "$identificador Alíquota ad rem do CBS (adRemCBS)"
+            );
+            $this->dom->addChild(
+                $gIBSCBSMono,
+                "vIBSMono",
+                $this->conditionalNumberFormatting($std->vIBSMono ?? 0),
+                true,
+                "$identificador Valor do IBS monofásico (vIBSMono)"
+            );
+            $this->dom->addChild(
+                $gIBSCBSMono,
+                "vCBSMono",
+                $this->conditionalNumberFormatting($std->vCBSMono ?? 0),
+                true,
+                "$identificador Valor do CBS monofásico (vCBSMono)"
+            );
+        }
         if (!empty($std->qBCMonoReten)) {
             $this->dom->addChild(
                 $gIBSCBSMono,
@@ -764,31 +767,32 @@ trait TraitTagDetIBSCBS
                 true,
                 "$identificador Valor da CBS Monofásica diferida (vCBSMonoDif)"
             );
-            $this->dom->addChild(
-                $gIBSCBSMono,
-                "vTotIBSMonoItem",
-                $this->conditionalNumberFormatting($std->vTotIBSMonoItem ?? null),
-                true,
-                "$identificador Total de IBS Monofásico (vTotIBSMonoItem)"
-            );
-            $this->dom->addChild(
-                $gIBSCBSMono,
-                "vTotCBSMonoItem",
-                $this->conditionalNumberFormatting($std->vTotCBSMonoItem ?? null),
-                true,
-                "$identificador Total da CBS Monofásica (vTotCBSMonoItem)"
-            );
         }
+        $this->dom->addChild(
+            $gIBSCBSMono,
+            "vTotIBSMonoItem",
+            $this->conditionalNumberFormatting($std->vTotIBSMonoItem ?? null),
+            true,
+            "$identificador Total de IBS Monofásico (vTotIBSMonoItem)"
+        );
+        $this->dom->addChild(
+            $gIBSCBSMono,
+            "vTotCBSMonoItem",
+            $this->conditionalNumberFormatting($std->vTotCBSMonoItem ?? null),
+            true,
+            "$identificador Total da CBS Monofásica (vTotCBSMonoItem)"
+        );
         $this->aGIBSCBSMono[$std->item] = $gIBSCBSMono;
         return $gIBSCBSMono;
     }
 
     /**
+     * Grupo de Transferecnia de Creditos
      * @param stdClass $std
      * @return DOMElement
      * @throws DOMException
      */
-    public function taggTranfCred(stdClass $std): DOMElement
+    public function taggTransfCred(stdClass $std): DOMElement
     {
         $possible = [
             'item',
@@ -817,6 +821,7 @@ trait TraitTagDetIBSCBS
     }
 
     /**
+     * Grupo de Credito Presumido de IBS com a ZF de Manaus
      * @param stdClass $std
      * @return DOMElement
      * @throws DOMException
