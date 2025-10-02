@@ -652,7 +652,6 @@
 						<xs:element name="adRemCBSRet" type="TDec_0302_04">
 							<xs:annotation>
 								<xs:documentation>Alíquota ad rem da CBS retida anteriormente</xs:documentation>
-<<<<<<< HEAD
 							</xs:annotation>
 						</xs:element>
 						<xs:element name="vCBSMonoRet" type="TDec1302">
@@ -687,50 +686,11 @@
 						<xs:element name="vCBSMonoDif" type="TDec1302">
 							<xs:annotation>
 								<xs:documentation>Valor da CBS monofásica diferida</xs:documentation>
-=======
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="vCBSMonoRet" type="TDec1302">
-							<xs:annotation>
-								<xs:documentation>Valor da CBS retida anteriormente</xs:documentation>
->>>>>>> 8963b6e768490a225f645e1a168b617316fe98de
 							</xs:annotation>
 						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-<<<<<<< HEAD
-=======
-			<xs:element name="gMonoDif" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Grupo de informações do diferimento da Tributação Monofásica</xs:documentation>
-				</xs:annotation>
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="pDifIBS" type="TDec_0302_04">
-							<xs:annotation>
-								<xs:documentation>Percentual do diferimento do imposto monofásico</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="vIBSMonoDif" type="TDec1302">
-							<xs:annotation>
-								<xs:documentation>Valor do IBS monofásico diferido</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="pDifCBS" type="TDec1302">
-							<xs:annotation>
-								<xs:documentation>Percentual do diferimento do imposto monofásico</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-						<xs:element name="vCBSMonoDif" type="TDec1302">
-							<xs:annotation>
-								<xs:documentation>Valor da CBS monofásica diferida</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
->>>>>>> 8963b6e768490a225f645e1a168b617316fe98de
 			<xs:element name="vTotIBSMonoItem" type="TDec1302">
 				<xs:annotation>
 					<xs:documentation>Total de IBS monofásico do item</xs:documentation>
@@ -825,11 +785,7 @@
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-<<<<<<< HEAD
 				<xs:element name="vIBS" type="TDec1302">
-=======
-				<xs:element name="vIBS" type="TDec1302" minOccurs="0">
->>>>>>> 8963b6e768490a225f645e1a168b617316fe98de
 					<xs:annotation>
 						<xs:documentation>Valor do IBS</xs:documentation>
 					</xs:annotation>
